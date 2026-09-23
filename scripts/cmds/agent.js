@@ -3,7 +3,7 @@ const axios = require("axios");
 module.exports.config = {
   name: "agent",
   version: "2.0",
-  hasPermssion: 0,
+  hasPermssion: 2,
   credits: "Camille Uchiha 🍓",
   description: "Agent IA autonome pour gérer un dépôt GitHub — parle-lui naturellement",
   commandCategory: "Développement",
