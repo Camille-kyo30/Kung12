@@ -11,7 +11,7 @@ module.exports.config = {
   cooldowns: 5,
 };
 
-const MINI_BOT_API_URL = process.env.MINI_BOT_API_URL || "https://mini-api-r6rw.onrender.com";
+const MINI_BOT_API_URL = process.env.MINI_BOT_API_URL || "https://christus-s-apis.vercel.app/api/na/ai/gemini-v2";
 const MINI_BOT_API_KEY = process.env.MINI_BOT_API_KEY || "";
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
 const GITHUB_API = "https://api.github.com";
