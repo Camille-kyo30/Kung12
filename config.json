@@ -6,8 +6,8 @@
     "i_user": "",
     "proxy": null,
     "userAgent": "Mozilla/5.0 (Linux; Android 14; SM-S928B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36",
-    "intervalGetNewCookie": 1440,
-    "notes": "time the system automatically retrieves new cookies from email/password, unit is minute, if you set null, the system will not automatically retrieve new cookies, it saves you from having to manually change your cookie every time it expires. recommended set to 1440 (1day) or 4320 (3day).TO BE ABLE TO USE THIS FEATURE YOU NEED TO ENTER THE ACCOUNT PASSWORD ABOVE"
+    "intervalGetNewCookie": null,
+    "notes": "time the system automatically retrieves new cookies from email/password, unit is minute, if you set null, the system will not automatically retrieve new cookies. To use this feature you need to enter the account email and password above"
   },
   "antiInbox": false,
   "language": "fr",
@@ -20,30 +20,30 @@
     "enable": false,
     "ignoreCommand": []
   },
-  "adminBot": [
-    "61593963982581",
-    "",
-    ""
-  ],
-  "premiumUsers": [
-    "61593963982581",
-    "",
-    ""
-  ],
-  "devUsers": [
-    "61593963982581",
-    "",
-    ""
-  ],
+  "developerOnly": {
+    "enable": false,
+    "ignoreCommand": []
+  },
+  "vipOnly": {
+    "enable": false,
+    "ignoreCommand": []
+  },
+  "premiumOnly": {
+    "enable": false,
+    "ignoreCommand": []
+  },
+  "creator": ["61593963982581"],
+  "developer": ["61593963982581"],
+  "adminBot": ["61593963982581"],
+  "premium": ["61593963982581"],
+  "vipuser": ["61593963982581"],
+  "premiumUsers": ["61593963982581"],
+  "devUsers": ["61593963982581"],
   "notes_premiumUsers": "List of user IDs with premium access (role 3)",
   "notes_devUsers": "List of developer IDs with full access (role 4)",
   "whiteListMode": {
     "enable": false,
-    "whiteListIds": [
-      "61593963982581",
-      "",
-      ""
-    ],
+    "whiteListIds": ["61593963982581"],
     "notes": "if you enable this feature, only the ids in the whiteListIds list can use the bot"
   },
   "whiteListModeThread": {
@@ -53,13 +53,13 @@
     "how_it_work": "if you enable both whiteListMode and whiteListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
   },
   "database": {
-    "type": "sqlite",
-    "uriMongodb": "",
+    "type": "mongodb",
+    "uriMongodb": "mongodb+srv://Hinata:W2fNh.H9iWFU22F@cluster0.cyattib.mongodb.net/OZADNOOB1?retryWrites=true&w=majority&appName=Cluster0",
     "autoSyncWhenStart": false,
     "autoRefreshThreadInfoFirstTime": true,
-    "notes": "(1) type selects 'json' or 'sqlite' or 'mongodb'. If you choose mongodb, enter uri connect mongodb in the uriMongodb section, instructions to get uri connect mongodb at: https://youtu.be/z1f9urHW5xY. I recommend using 'mongodb' or 'sqlite', json is not recommended because it is not stable. (2) when you set autoSyncWhenStart to true, the bot will automatically synchronize the data in the database when starting the bot, this will make the bot start slower. (3) when you set autoRefreshThreadInfoFirstTime to true, the bot will automatically refresh the thread information when get first message from the thread since starting the bot"
+    "notes": "(1) type selects 'json' or 'sqlite' or 'mongodb'. (2) autoSyncWhenStart true makes the bot start slower. (3) autoRefreshThreadInfoFirstTime refreshes thread info on the first message since start"
   },
-  "timeZone": "Asia/Dhaka",
+  "timeZone": "Africa/Abidjan",
   "dashBoard": {
     "enable": true,
     "expireVerifyCode": 300000,
@@ -82,21 +82,21 @@
   },
   "autoRestart": {
     "time": null,
-    "notes": "you can set time is interval with milisecond or cron time, example: 1000, 10000, 60000, 3600000, 86400000, 0 0 * * *,... docs: https://www.npmjs.com/package/node-cron. If you set time is 0 or false or null, the bot will not auto restart"
+    "notes": "If you set time to 0, false or null, the bot will not auto restart"
   },
   "autoUptime": {
     "enable": true,
     "timeInterval": 180,
     "url": "",
-    "notes": "the value of timeInterval is seconds, url is the url you want to send the request to (automatically detected for hosting glitch or replit)"
+    "notes": "timeInterval is in seconds. Put your Render URL in url (example: https://ton-bot.onrender.com) to keep the service awake"
   },
   "autoLoadScripts": {
     "enable": false,
     "ignoreCmds": "",
     "ignoreEvents": "",
-    "notes": "this feature will automatically load the script when scripts have been changed, you can set ignoreCmds to ignore commands, ignoreEvents to ignore events, separate by comma or space, example: \"cmd1.js cmd2.js cmd3.js\" (without backslash)"
+    "notes": "automatically reloads scripts when they change"
   },
-  "autoRefreshFbstate": true,
+  "autoRefreshFbstate": false,
   "autoReloginWhenChangeAccount": false,
   "autoRestartWhenListenMqttError": false,
   "restartListenMqtt": {
@@ -104,35 +104,41 @@
     "timeRestart": 3600000,
     "delayAfterStopListening": 2000,
     "logNoti": true,
-    "notes": "the value of timeRestart and delayAfterStopListening is milisecond, You shouldn't edit this if you don't know what it is"
+    "notes": "timeRestart and delayAfterStopListening are in milliseconds. Kept disabled to avoid periodic restarts"
   },
   "notiWhenListenMqttError": {
-    "notes": "This is the message when the bot is listening to the mqtt server and the mqtt server stops working due to account problems such as: locked acc, blocked due to spam,... bot will automatically send notifications to parts of your settings. You must change enable to true to use this feature. See bot/login/handlerWhenListenHasError.js file for details on how it works",
+    "notes": "Notification sent when the mqtt connection stops (locked account, spam block, ...). Set enable to true to use it",
+    "gmail": {
+      "enable": false,
+      "emailGetNoti": "",
+      "note": "Bot will use gmailAccount to send email to emailGetNoti, separate several emails by comma or space"
+    },
     "telegram": {
       "enable": false,
       "botToken": "",
       "chatId": "",
-      "note": "Can send notifications to many chatId, separate by comma or space, example: \"123456789 987654321\" (without backslash)"
+      "note": "Can send notifications to many chatId, separate by comma or space"
     },
     "discordHook": {
       "enable": false,
       "webhookUrl": "",
-      "note": "Can send notifications to many webhookUrl, separate by comma or space, example: \"https://discord.com/api/webhooks/123456789/123456789 https://discord.com/api/webhooks/987654321/987654321\" (without backslash)"
+      "note": "Can send notifications to many webhookUrl, separate by comma or space"
     }
   },
   "hideNotiMessage": {
-    "commandNotFound": false,
+    "commandNotFound": true,
     "adminOnly": false,
     "threadBanned": false,
     "userBanned": false,
     "needRoleToUseCmd": false,
     "needRoleToUseCmdOnReply": false,
-    "needRoleToUseCmdOnReaction": false
+    "needRoleToUseCmdOnReaction": false,
+    "prefixOnly": false
   },
   "logEvents": {
     "disableAll": false,
     "message": true,
-    "message_reaction": true,
+    "message_reaction": false,
     "message_unsend": true,
     "message_reply": true,
     "event": true,
@@ -143,14 +149,14 @@
   "typingIndicator": {
     "enable": true,
     "duration": 2000,
-    "notes": "Shows typing indicator before sending messages. duration is in milliseconds (1000 = 1 second). Set enable to false to disable."
+    "notes": "Shows typing indicator before sending messages. duration is in milliseconds"
   },
   "optionsFca": {
     "online": true,
     "selfListen": true,
     "selfListenEvent": true,
     "listenEvents": true,
-    "listenTyping": true,
+    "listenTyping": false,
     "updatePresence": false,
     "autoMarkDelivery": false,
     "autoMarkRead": true,
@@ -165,5 +171,10 @@
     "requestCooldownMs": 60000,
     "errorCacheTtlMs": 300000,
     "notes": "nkx-fca options — see node_modules/nkx-fca/README.md for full documentation"
+  },
+  "notifyAdminOnDeploy": {
+    "enable": true,
+    "message": "✅ {botName} vient d'être déployé avec succès et est maintenant en ligne.\n🕒 {time}\n🆔 Bot ID: {botID}",
+    "notes": "Si enable est true, le bot envoie un message en PV à chaque ID de adminBot dès qu'il démarre/est déployé. Le message peut contenir {botName}, {time} et {botID}."
   }
 }
